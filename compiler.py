@@ -1,7 +1,17 @@
 from antlr4 import *
-from CLexer import CLexer
-from CListener import CListener
-from CParser import CParser
+#from . import antlr_py as grammar
+from antlr_py.CLexer import CLexer
+from antlr_py.CListener import CListener
+from antlr_py.CParser import CParser
+from Ast import AstVisitor
+from antlr_ast.ast import parse as parse_ast, process_tree
+
+
+#def parse(text, start="expr", **kwargs):
+#    antlr_tree = parse_ast(grammar, text, start, upper=False, **kwargs)
+#    simple_tree = process_tree(antlr_tree, transformer_cls=Transformer)
+
+#    return simple_tree
 
 
 def main():
@@ -11,6 +21,8 @@ def main():
         lexer = CLexer(stream)
         stream = CommonTokenStream(lexer)
         parser = CParser(stream)
+        #visitor = AstVisitor()
+
         token = lexer.nextToken()
         print(token)
         while (token.text != "<EOF>"):

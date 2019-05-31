@@ -1,5 +1,5 @@
 from antlr_ast.ast import AstNode
-from CVisitor import CVisitor
+from antlr_py.CVisitor import CVisitor
 
 
 class SubExpr(AstNode):
