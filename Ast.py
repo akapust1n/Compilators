@@ -1,4 +1,4 @@
-from antlr_ast import AstNode
+from antlr_ast.ast import AstNode
 from CVisitor import CVisitor
 
 
