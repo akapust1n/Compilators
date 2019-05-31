@@ -1,33 +1,46 @@
 from antlr4 import *
-#from . import antlr_py as grammar
+import antlr4.tree.Tree
+import antlr_py as grammar
 from antlr_py.CLexer import CLexer
 from antlr_py.CListener import CListener
 from antlr_py.CParser import CParser
-from Ast import AstVisitor
+from antlr_py.CVisitor import CVisitor
+from Ast import AstVisitor, Transformer
 from antlr_ast.ast import parse as parse_ast, process_tree
+import json
+import argparse
 
 
-#def parse(text, start="expr", **kwargs):
-#    antlr_tree = parse_ast(grammar, text, start, upper=False, **kwargs)
-#    simple_tree = process_tree(antlr_tree, transformer_cls=Transformer)
-
-#    return simple_tree
+def handleExpression(expr, names, tabs=""):
+    children = {}
+    for child in expr.getChildren():
+        if isinstance(child, antlr4.tree.Tree.TerminalNode):
+            children[child.getText()] = names[child.symbol.type-1]
+        else:
+            children[type(child).__name__] = handleExpression(child, names, tabs + '-')
+    return children
 
 
 def main():
-    with open("samples/factorial.c", "r") as file:
+    argparser = argparse.ArgumentParser()
+    argparser.add_argument("--input_file", type=str, default="samples/factorial.c")
+    args = argparser.parse_args()
+
+    input_file = args.input_file
+    output_json = input_file + ".json"
+    print("Input file: %s" % input_file)
+    print("Output json to: %s" % output_json)
+
+    with open(input_file, "r") as file:
         code = file.read()
         stream = InputStream(code)
         lexer = CLexer(stream)
         stream = CommonTokenStream(lexer)
         parser = CParser(stream)
-        #visitor = AstVisitor()
-
-        token = lexer.nextToken()
-        print(token)
-        while (token.text != "<EOF>"):
-            token = lexer.nextToken()
-            print(token)
+        tree = parser.compilationUnit()
+        tree = handleExpression(tree, lexer.ruleNames)
+        with open(output_json, "w") as output_file:
+            output_file.write(json.dumps(tree))
 
 
 if __name__ == '__main__':

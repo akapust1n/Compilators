@@ -1,5 +1,5 @@
 
-int main()
+int main(int argc, char* argv[])
 {
     int n, i;
     unsigned long long factorial = 1;

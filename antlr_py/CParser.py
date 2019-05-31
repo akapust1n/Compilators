@@ -1,9 +1,10 @@
-# Generated from C.g4 by ANTLR 4.7.2
+# Generated from ./C.g4 by ANTLR 4.7.2
 # encoding: utf-8
 from antlr4 import *
 from io import StringIO
 from typing.io import TextIO
 import sys
+
 
 def serializedATN():
     with StringIO() as buf:
@@ -957,6 +958,7 @@ class CParser ( Parser ):
 
 
 
+
     class PrimaryExpressionContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -1138,6 +1140,7 @@ class CParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class GenericSelectionContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -1209,6 +1212,7 @@ class CParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class GenericAssocListContext(ParserRuleContext):
 
@@ -1288,6 +1292,7 @@ class CParser ( Parser ):
             self.unrollRecursionContexts(_parentctx)
         return localctx
 
+
     class GenericAssociationContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -1364,6 +1369,7 @@ class CParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class PostfixExpressionContext(ParserRuleContext):
 
@@ -1646,6 +1652,7 @@ class CParser ( Parser ):
             self.unrollRecursionContexts(_parentctx)
         return localctx
 
+
     class ArgumentExpressionListContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -1723,6 +1730,7 @@ class CParser ( Parser ):
         finally:
             self.unrollRecursionContexts(_parentctx)
         return localctx
+
 
     class UnaryExpressionContext(ParserRuleContext):
 
@@ -1881,6 +1889,7 @@ class CParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class UnaryOperatorContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -1946,6 +1955,7 @@ class CParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class CastExpressionContext(ParserRuleContext):
 
@@ -2048,6 +2058,7 @@ class CParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class MultiplicativeExpressionContext(ParserRuleContext):
 
@@ -2166,6 +2177,7 @@ class CParser ( Parser ):
             self.unrollRecursionContexts(_parentctx)
         return localctx
 
+
     class AdditiveExpressionContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -2267,6 +2279,7 @@ class CParser ( Parser ):
             self.unrollRecursionContexts(_parentctx)
         return localctx
 
+
     class ShiftExpressionContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -2367,6 +2380,7 @@ class CParser ( Parser ):
         finally:
             self.unrollRecursionContexts(_parentctx)
         return localctx
+
 
     class RelationalExpressionContext(ParserRuleContext):
 
@@ -2501,6 +2515,7 @@ class CParser ( Parser ):
             self.unrollRecursionContexts(_parentctx)
         return localctx
 
+
     class EqualityExpressionContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -2602,6 +2617,7 @@ class CParser ( Parser ):
             self.unrollRecursionContexts(_parentctx)
         return localctx
 
+
     class AndExpressionContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -2679,6 +2695,7 @@ class CParser ( Parser ):
         finally:
             self.unrollRecursionContexts(_parentctx)
         return localctx
+
 
     class ExclusiveOrExpressionContext(ParserRuleContext):
 
@@ -2758,6 +2775,7 @@ class CParser ( Parser ):
             self.unrollRecursionContexts(_parentctx)
         return localctx
 
+
     class InclusiveOrExpressionContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -2835,6 +2853,7 @@ class CParser ( Parser ):
         finally:
             self.unrollRecursionContexts(_parentctx)
         return localctx
+
 
     class LogicalAndExpressionContext(ParserRuleContext):
 
@@ -2914,6 +2933,7 @@ class CParser ( Parser ):
             self.unrollRecursionContexts(_parentctx)
         return localctx
 
+
     class LogicalOrExpressionContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -2992,6 +3012,7 @@ class CParser ( Parser ):
             self.unrollRecursionContexts(_parentctx)
         return localctx
 
+
     class ConditionalExpressionContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -3065,6 +3086,7 @@ class CParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class AssignmentExpressionContext(ParserRuleContext):
 
@@ -3150,6 +3172,7 @@ class CParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class AssignmentOperatorContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -3231,6 +3254,7 @@ class CParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class ExpressionContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -3309,6 +3333,7 @@ class CParser ( Parser ):
             self.unrollRecursionContexts(_parentctx)
         return localctx
 
+
     class ConstantExpressionContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -3354,6 +3379,7 @@ class CParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class DeclarationContext(ParserRuleContext):
 
@@ -3437,6 +3463,7 @@ class CParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class DeclarationSpecifiersContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -3498,6 +3525,7 @@ class CParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class DeclarationSpecifiers2Context(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -3558,6 +3586,7 @@ class CParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class DeclarationSpecifierContext(ParserRuleContext):
 
@@ -3652,6 +3681,7 @@ class CParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class InitDeclaratorListContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -3730,6 +3760,7 @@ class CParser ( Parser ):
             self.unrollRecursionContexts(_parentctx)
         return localctx
 
+
     class InitDeclaratorContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -3800,6 +3831,7 @@ class CParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class StorageClassSpecifierContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -3865,6 +3897,7 @@ class CParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class TypeSpecifierContext(ParserRuleContext):
 
@@ -4053,6 +4086,7 @@ class CParser ( Parser ):
             self.unrollRecursionContexts(_parentctx)
         return localctx
 
+
     class StructOrUnionSpecifierContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -4142,6 +4176,7 @@ class CParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class StructOrUnionContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -4195,6 +4230,7 @@ class CParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class StructDeclarationListContext(ParserRuleContext):
 
@@ -4268,6 +4304,7 @@ class CParser ( Parser ):
         finally:
             self.unrollRecursionContexts(_parentctx)
         return localctx
+
 
     class StructDeclarationContext(ParserRuleContext):
 
@@ -4349,6 +4386,7 @@ class CParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class SpecifierQualifierListContext(ParserRuleContext):
 
@@ -4433,6 +4471,7 @@ class CParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class StructDeclaratorListContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -4511,6 +4550,7 @@ class CParser ( Parser ):
             self.unrollRecursionContexts(_parentctx)
         return localctx
 
+
     class StructDeclaratorContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -4587,6 +4627,7 @@ class CParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class EnumSpecifierContext(ParserRuleContext):
 
@@ -4701,6 +4742,7 @@ class CParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class EnumeratorListContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -4779,6 +4821,7 @@ class CParser ( Parser ):
             self.unrollRecursionContexts(_parentctx)
         return localctx
 
+
     class EnumeratorContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -4849,6 +4892,7 @@ class CParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class EnumerationConstantContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -4893,6 +4937,7 @@ class CParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class AtomicTypeSpecifierContext(ParserRuleContext):
 
@@ -4955,6 +5000,7 @@ class CParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class TypeQualifierContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -5014,6 +5060,7 @@ class CParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class FunctionSpecifierContext(ParserRuleContext):
 
@@ -5106,6 +5153,7 @@ class CParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class AlignmentSpecifierContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -5190,6 +5238,7 @@ class CParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class DeclaratorContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -5266,6 +5315,7 @@ class CParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class DirectDeclaratorContext(ParserRuleContext):
 
@@ -5564,6 +5614,7 @@ class CParser ( Parser ):
             self.unrollRecursionContexts(_parentctx)
         return localctx
 
+
     class GccDeclaratorExtensionContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -5652,6 +5703,7 @@ class CParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class GccAttributeSpecifierContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -5719,6 +5771,7 @@ class CParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class GccAttributeListContext(ParserRuleContext):
 
@@ -5799,6 +5852,7 @@ class CParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class GccAttributeContext(ParserRuleContext):
 
@@ -5897,6 +5951,7 @@ class CParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class NestedParenthesesBlockContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -5987,6 +6042,7 @@ class CParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class PointerContext(ParserRuleContext):
 
@@ -6106,6 +6162,7 @@ class CParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class TypeQualifierListContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -6179,6 +6236,7 @@ class CParser ( Parser ):
             self.unrollRecursionContexts(_parentctx)
         return localctx
 
+
     class ParameterTypeListContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -6247,6 +6305,7 @@ class CParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class ParameterListContext(ParserRuleContext):
 
@@ -6325,6 +6384,7 @@ class CParser ( Parser ):
         finally:
             self.unrollRecursionContexts(_parentctx)
         return localctx
+
 
     class ParameterDeclarationContext(ParserRuleContext):
 
@@ -6407,6 +6467,7 @@ class CParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class IdentifierListContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -6484,6 +6545,7 @@ class CParser ( Parser ):
             self.unrollRecursionContexts(_parentctx)
         return localctx
 
+
     class TypeNameContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -6542,6 +6604,7 @@ class CParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class AbstractDeclaratorContext(ParserRuleContext):
 
@@ -6632,6 +6695,7 @@ class CParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class DirectAbstractDeclaratorContext(ParserRuleContext):
 
@@ -6972,6 +7036,7 @@ class CParser ( Parser ):
             self.unrollRecursionContexts(_parentctx)
         return localctx
 
+
     class TypedefNameContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -7016,6 +7081,7 @@ class CParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class InitializerContext(ParserRuleContext):
 
@@ -7104,6 +7170,7 @@ class CParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class InitializerListContext(ParserRuleContext):
 
@@ -7204,6 +7271,7 @@ class CParser ( Parser ):
             self.unrollRecursionContexts(_parentctx)
         return localctx
 
+
     class DesignationContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -7254,6 +7322,7 @@ class CParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class DesignatorListContext(ParserRuleContext):
 
@@ -7327,6 +7396,7 @@ class CParser ( Parser ):
         finally:
             self.unrollRecursionContexts(_parentctx)
         return localctx
+
 
     class DesignatorContext(ParserRuleContext):
 
@@ -7404,6 +7474,7 @@ class CParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class StaticAssertDeclarationContext(ParserRuleContext):
 
@@ -7494,6 +7565,7 @@ class CParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class StatementContext(ParserRuleContext):
 
@@ -7704,6 +7776,7 @@ class CParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class LabeledStatementContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -7798,6 +7871,7 @@ class CParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class CompoundStatementContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -7860,6 +7934,7 @@ class CParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class BlockItemListContext(ParserRuleContext):
 
@@ -7934,6 +8009,7 @@ class CParser ( Parser ):
             self.unrollRecursionContexts(_parentctx)
         return localctx
 
+
     class BlockItemContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -7997,6 +8073,7 @@ class CParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class ExpressionStatementContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -8054,6 +8131,7 @@ class CParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class SelectionStatementContext(ParserRuleContext):
 
@@ -8161,6 +8239,7 @@ class CParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class IterationStatementContext(ParserRuleContext):
 
@@ -8279,6 +8358,7 @@ class CParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class ForConditionContext(ParserRuleContext):
 
@@ -8403,6 +8483,7 @@ class CParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class ForDeclarationContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -8467,6 +8548,7 @@ class CParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class ForExpressionContext(ParserRuleContext):
 
@@ -8545,6 +8627,7 @@ class CParser ( Parser ):
         finally:
             self.unrollRecursionContexts(_parentctx)
         return localctx
+
 
     class JumpStatementContext(ParserRuleContext):
 
@@ -8668,6 +8751,7 @@ class CParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class CompilationUnitContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -8725,6 +8809,7 @@ class CParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class TranslationUnitContext(ParserRuleContext):
 
@@ -8799,6 +8884,7 @@ class CParser ( Parser ):
             self.unrollRecursionContexts(_parentctx)
         return localctx
 
+
     class ExternalDeclarationContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -8870,6 +8956,7 @@ class CParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class FunctionDefinitionContext(ParserRuleContext):
 
@@ -8947,6 +9034,7 @@ class CParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class DeclarationListContext(ParserRuleContext):
 
