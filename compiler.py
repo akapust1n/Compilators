@@ -1,12 +1,7 @@
 from antlr4 import *
 import antlr4.tree.Tree
-import antlr_py as grammar
 from antlr_py.CLexer import CLexer
-from antlr_py.CListener import CListener
 from antlr_py.CParser import CParser
-from antlr_py.CVisitor import CVisitor
-from Ast import AstVisitor, Transformer
-from antlr_ast.ast import parse as parse_ast, process_tree
 import json
 import argparse
 
