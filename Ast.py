@@ -7,7 +7,7 @@ class SubExpr(AstNode):
 
 
 class BinaryExpr(AstNode):
-    _field = ['left', 'right', 'op']
+    _fields = ['left', 'right', 'op']
 
 
 class NotExpr(AstNode):
