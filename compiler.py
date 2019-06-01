@@ -1,10 +1,6 @@
-from antlr4 import *
-import antlr4.tree.Tree
-from antlr_py.CLexer import CLexer
-from antlr_py.CParser import CParser
 import json
 import argparse
-from pycparser import c_parser, c_ast, parse_file
+from pycparser import c_parser
 import sys
 
 
@@ -53,14 +49,8 @@ def main():
 
     with open(input_file, "r") as file:
         code = file.read()
-        stream = InputStream(code)
-        lexer = CLexer(stream)
-        stream = CommonTokenStream(lexer)
-        parser = CParser(stream)
-        tree = parser.compilationUnit()
-        #tree = handleExpression(tree, lexer.ruleNames)
-        pparser = c_parser.CParser()
-        ast = pparser.parse(code)
+        parser = c_parser.CParser()
+        ast = parser.parse(code)
         ast.show()
         dictr = to_screen(ast)
         with open(output_json, "w") as output_file:
