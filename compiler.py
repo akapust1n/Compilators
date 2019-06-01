@@ -4,6 +4,7 @@ from antlr_py.CLexer import CLexer
 from antlr_py.CParser import CParser
 import json
 import argparse
+from pycparser import c_parser, c_ast
 
 
 def handleExpression(expr, names, tabs=""):
@@ -18,7 +19,7 @@ def handleExpression(expr, names, tabs=""):
 
 def main():
     argparser = argparse.ArgumentParser()
-    argparser.add_argument("--input_file", type=str, default="samples/factorial.c")
+    argparser.add_argument("--input_file", type=str, default="samples/simple.c")
     args = argparser.parse_args()
 
     input_file = args.input_file
@@ -34,6 +35,9 @@ def main():
         parser = CParser(stream)
         tree = parser.compilationUnit()
         tree = handleExpression(tree, lexer.ruleNames)
+        pparser = c_parser.CParser()
+        ast = pparser.parse(code)
+        ast.show()
         with open(output_json, "w") as output_file:
             output_file.write(json.dumps(tree))
 
