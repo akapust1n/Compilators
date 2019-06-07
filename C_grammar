@@ -1,0 +1,56 @@
+Comment => \/\/
+# This wrap thing is pretty useless. If we drop wrap => Block this effectively creates a synonym. Nothing more.
+# Though it does provide a top-level unique element, which I guess is nice to have.
+Wrap => Block
+# \s matches a single whitespace. We do need a whitespace, otherwise 911invalid gets parsed in 911, invalid...
+Block => Statement \s Block | Statement
+
+# I'm not sure how to do FunctionArgs => Declaration , .. | NOTHING
+Function => Type Identifier \( FunctionArgs \) \{ Block \} | Type Identifier \(\) \{ Block \}
+FunctionArgs => Declaration REPEAT_START , Declaration REPEAT_END
+
+# We cant have  `Statement Statement` as an alternative, that would make it a (left!!) recursive rule...
+Statement => If | ForLoop | Function | Return | Declaration ; | Declaration | Expr ; | Expr | ;
+
+# Cant put any Expr here, we cant do '-[a binop]'. Unless we group I guess.
+UnOp => UnaryOperator SimpleExpr
+
+Return => return Expr ;?
+Declaration => Type Identifier = Expr  | Type Identifier \[ Integer \] | Type Identifier
+# Assignment is only for previously declared value.
+Assignment => Identifier = Expr
+FunctionCall => Identifier \( FunctionCallArgs \) | Identifier \(\)
+FunctionCallArgs => Expr REPEAT_START , Expr REPEAT_END
+# I'll probably need to handle escaping at some point
+String => " [^"]* "
+Char => ' [a-zA-Z0-9]{1} '
+Identifier => [a-zA-Z_][a-zA-Z0-9_]*
+Integer => [1-9][0-9]* | 0
+
+
+Expr => Expr2 REPEAT_START (\+|-) Expr REPEAT_END
+# Expr2 is here strictly for precedence.
+Expr2 => SimpleExpr REPEAT_START Operator SimpleExpr REPEAT_END
+# SimpleExpr is everything we can put after a Unary Operator.
+# FunctionCall needs to be before Identifier.
+SimpleExpr =>  Assignment | UnOp | \( Expr \) | FunctionCall | Identifier | Integer | String | Char
+
+
+# Non-capturing groups FTW
+Operator => (?:==)|(?:<=)|(?:>=)|(?:!=) | \* | / | < | > | %
+
+UnaryOperator => ! | \~ | - | \+
+
+# Maybe add more types later on
+Type => int | char
+
+
+##### Control Flow
+If => if \( Expr \) ControlFlowBody else ControlFlowBody | if \( Expr \) ControlFlowBody
+
+# The last bit could probably be anything (not just an assignment), so we're choosing to 'play safe'.
+ForLoop => for \( ForInit ; Expr ; Assignment \) ControlFlowBody
+ForInit => Declaration | Assignment
+
+# We allow if without braces when there's a single statement. We also allow nothing in braces.
+ControlFlowBody => Statement | \{ Block \} | \{ \s \}
