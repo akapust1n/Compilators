@@ -18,7 +18,7 @@ UnOp => UnaryOperator SimpleExpr
 Return => return Expr ;?
 Declaration => Type Identifier = Expr  | Type Identifier \[ Integer \] | Type Identifier
 # Assignment is only for previously declared value.
-Assignment => Identifier = Expr
+Assignment => Identifier = Expr  | Identifier \[ Integer \] = Expr
 FunctionCall => Identifier \( FunctionCallArgs \) | Identifier \(\)
 FunctionCallArgs => Expr REPEAT_START , Expr REPEAT_END
 # I'll probably need to handle escaping at some point
