@@ -1,1 +1,15 @@
-{"FileAST: ": {"ext[0]": {"FuncDef: ": {"decl": {"Decl: main, [], [], []": {"type": {"FuncDecl: ": {"type": {"TypeDecl: main, []": {"type": {"IdentifierType: ['int']": {}}}}}}}}, "body": {"Compound: ": {"block_items[0]": {"Decl: a, [], [], []": {"type": {"TypeDecl: a, []": {"type": {"IdentifierType: ['int']": {}}}}}}, "block_items[1]": {"Decl: b, [], [], []": {"type": {"TypeDecl: b, []": {"type": {"IdentifierType: ['int']": {}}}}}}, "block_items[2]": {"Assignment: =": {"lvalue": {"ID: a": {}}, "rvalue": {"Constant: int, 1": {}}}}, "block_items[3]": {"Assignment: =": {"lvalue": {"ID: b": {}}, "rvalue": {"BinaryOp: -": {"left": {"ID: a": {}}, "right": {"Constant: int, 1": {}}}}}}, "block_items[4]": {"While: ": {"cond": {"BinaryOp: !=": {"left": {"ID: b": {}}, "right": {"Constant: int, 0": {}}}}, "stmt": {"If: ": {"cond": {"BinaryOp: >": {"left": {"ID: a": {}}, "right": {"ID: b": {}}}}, "iftrue": {"Assignment: =": {"lvalue": {"ID: a": {}}, "rvalue": {"BinaryOp: -": {"left": {"ID: a": {}}, "right": {"ID: b": {}}}}}}, "iffalse": {"Assignment: =": {"lvalue": {"ID: b": {}}, "rvalue": {"BinaryOp: -": {"left": {"ID: b": {}}, "right": {"ID: a": {}}}}}}}}}}, "block_items[5]": {"Return: ": {"expr": {"ID: a": {}}}}}}}}}}
+{
+    "FileAST: ": {
+        "ext[0]": {
+            "Decl: a, [], [], []": {
+                "type": {
+                    "TypeDecl: a, []": {
+                        "type": {
+                            "IdentifierType: ['int']": {}
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
