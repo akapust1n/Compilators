@@ -13,7 +13,6 @@ class CustomBuilder(ir.IRBuilder):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-
     @contextlib.contextmanager
     def _branch_helper_goto_start(self, bbenter, bbexit, add_terminal=True):
         """
@@ -65,7 +64,8 @@ class CustomBuilder(ir.IRBuilder):
         self.branch(bbincr)
 
         # I think the value yielded by _branch_helper is irrelevant: we won't use it and yielding it does affect state.
-        for_cond = self._branch_helper_goto_start(bbcond, bbend, add_terminal=False)
+        for_cond = self._branch_helper_goto_start(
+            bbcond, bbend, add_terminal=False)
         for_incr = self._branch_helper_goto_start(bbincr, bbend)
         for_body = self._branch_helper_goto_start(bbbody, bbend)
         yield for_cond, for_incr, for_body
@@ -102,7 +102,8 @@ llvm_converter_state = LlvmConverterState()
 def function_to_llvm(node: Function, module: ir.Module):
     assert module is not None
 
-    args = to_llvm(node.args, None, module) if node.args is not None else tuple([])
+    args = to_llvm(node.args, None,
+                   module) if node.args is not None else tuple([])
     # Hardcoded type...
     f_type = ir.FunctionType(ir.IntType(64), args)
 
@@ -138,9 +139,18 @@ def char_to_llvm(node, builder, module):
     return to_llvm(Integer(ord(node.value)), builder, module)
 
 
-type_to_llvm_type = {'int': ir.IntType(64),
-                     'char': ir.IntType(64)  # Not accurate/optimal. Whatever.
-                     }
+def type_to_llvm_type(type):
+    if(type == 'int' or type == 'char'):
+        return ir.IntType(64)
+    # )))))))))) это ужасно
+    size = int(type.split("(")[1].split("name=")[1].split(")")[0])
+    print(size, "size 34234")
+    return ir.ArrayType(ir.IntType(64), size)
+
+
+# type_to_llvm_type = {'int': ir.IntType(64),
+ #                    'char': ir.IntType(64)  # Not accurate/optimal. Whatever.
+  #                   }
 
 
 def to_llvm(node: AstNode, builder: Union[CustomBuilder, None] = None, module: Union[ir.Module, None] = None):
@@ -158,7 +168,7 @@ def to_llvm(node: AstNode, builder: Union[CustomBuilder, None] = None, module: U
             # Namely we don't want to allocate memory now, we just want the type of the variable.
             # Also we want to keep the name of the arg here for future Identifier nodes!
             llvm_converter_state.arg_identifiers_to_index[arg.identifier.name] = i
-            arg_list.append(type_to_llvm_type[arg.type])
+            arg_list.append(type_to_llvm_type(arg.type))
         return tuple(arg_list)
     if isinstance(node, FunctionCall):
         args = [] if not node.args else to_llvm(node.args, builder, module)
@@ -169,7 +179,9 @@ def to_llvm(node: AstNode, builder: Union[CustomBuilder, None] = None, module: U
             arg_list.append(to_llvm(arg, builder, module))
         return arg_list
     if isinstance(node, Declaration):
-        variable = builder.alloca(type_to_llvm_type[node.type], name=node.identifier.name)
+        print(node.type)
+        variable = builder.alloca(
+            type_to_llvm_type(node.type), name=node.identifier.name)
         llvm_converter_state.identifier_to_var[node.identifier.name] = variable
         if node.value is not None:
             return builder.store(to_llvm(node.value, builder, module), variable)
@@ -260,7 +272,8 @@ def to_llvm(node: AstNode, builder: Union[CustomBuilder, None] = None, module: U
         to_llvm(node.for_init, builder, module)
         with builder.for_loop(cond_varname) as (condition, incr, loop):
             with condition:
-                condition_to_llvm(node.for_condition, builder, module, varname=cond_varname)
+                condition_to_llvm(node.for_condition, builder,
+                                  module, varname=cond_varname)
             with incr:
                 to_llvm(node.for_increment, builder, module)
             with loop:
@@ -276,7 +289,8 @@ def condition_to_llvm(node, builder: CustomBuilder, module, varname=''):
         # If it's already a boolean (ir.IntType(1)) we cast it to int64. Compare it to 0. Get a boolean. Great!
         return builder.icmp_signed('!=', to_llvm(node, builder, module), ir.Constant(ir.IntType(64), 0), name=varname)
     else:
-        raise NotImplementedError('Lazy developer does not implement what does not crash')
+        raise NotImplementedError(
+            'Lazy developer does not implement what does not crash')
 
 
 def integer_to_llvm(node: Integer):
