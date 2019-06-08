@@ -9,6 +9,7 @@ from tree import Function, Return, Integer, AstNode, BodyBlock, FunctionArgs, Fu
 
 dictr = {}
 
+
 class CustomBuilder(ir.IRBuilder):
 
     def __init__(self, *args, **kwargs):
@@ -54,7 +55,7 @@ class CustomBuilder(ir.IRBuilder):
         bbend = self.append_basic_block(name=bb.name + '.endfor')
 
         # In the current block we always redirect to the for condition. No questions asked.
-        #self.branch(bbcond)
+        self.branch(bbcond)
 
         # Same at the end of bbincr
         self.position_at_end(bbincr)
@@ -180,14 +181,14 @@ def to_llvm(node: AstNode, builder: Union[CustomBuilder, None] = None, module: U
             arg_list.append(to_llvm(arg, builder, module))
         return arg_list
     if isinstance(node, Declaration):
-        #print(node.type)
+        # print(node.type)
         variable = builder.alloca(
             type_to_llvm_type(node.type), name=node.identifier.name)
         tmp = str(variable)
         index1 = tmp.find("[")+1
         if index1 > 0:
             index2 = tmp.find("]")
-            count = int(tmp[index1 : index2])
+            count = int(tmp[index1: index2])
             new_type = node.type
             index = node.identifier.name.find("[")
             for i in range(0, count):
@@ -233,11 +234,12 @@ def to_llvm(node: AstNode, builder: Union[CustomBuilder, None] = None, module: U
         if (node.identifier.name.find("[") > 0):
             index1 = node.identifier.name.find("[")+1
             index2 = node.identifier.name.find("]")
-            varr = node.identifier.name[index1 : index2]
+            varr = node.identifier.name[index1: index2]
             try:
                 varr = int(varr)
             except:
-                var1 = llvm_converter_state.identifier_to_var[str(node.identifier.name).replace(varr, str(dictr[varr]))]
+                var1 = llvm_converter_state.identifier_to_var[str(
+                    node.identifier.name).replace(varr, str(dictr[varr]))]
                 return builder.store(to_llvm(node.value, builder, module), var1)
         elif hasattr(node.value, "value"):
             dictr[node.identifier.name] = node.value.value
