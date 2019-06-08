@@ -24,7 +24,7 @@ FunctionCallArgs => Expr REPEAT_START , Expr REPEAT_END
 # I'll probably need to handle escaping at some point
 String => " [^"]* "
 Char => ' [a-zA-Z0-9]{1} '
-Identifier => [a-zA-Z_][a-zA-Z0-9_]*
+Identifier => [a-zA-Z_][a-zA-Z0-9_]* | [a-zA-Z_][a-zA-Z0-9_]* \[ Integer \]
 Integer => [1-9][0-9]* | 0
 
 

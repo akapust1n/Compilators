@@ -183,12 +183,35 @@ def to_llvm(node: AstNode, builder: Union[CustomBuilder, None] = None, module: U
         variable = builder.alloca(
             type_to_llvm_type(node.type), name=node.identifier.name)
         llvm_converter_state.identifier_to_var[node.identifier.name] = variable
+        tmp = str(variable)
+        index1 = tmp.find("[")+1
+        if index1 > 0:
+            index2 = tmp.find("i64") - 2
+            count = int(tmp[index1 : index2])
+            new_type = node.type[:node.type.index("Identifier")]
+            for i in range(0, count):
+                new_name = node.identifier.name+"["+str(i)+"]"
+                new_variable = builder.alloca(
+                    type_to_llvm_type(new_type), name=new_name)
+                llvm_converter_state.identifier_to_var[new_name] = new_variable
         if node.value is not None:
             return builder.store(to_llvm(node.value, builder, module), variable)
         else:
             return variable
 
     if isinstance(node, Assignment):
+        """tmp = ""
+        if node.identifier.name.find("[") > -1:
+            index = node.identifier.name.index("[")
+            numb = node.identifier.name[index+1]
+            tmp = node.identifier.name[:index]
+            ttmp = tmp + "[" + str(numb) + "]"
+            llvm_converter_state.identifier_to_var[ttmp] = llvm_converter_state.identifier_to_var[tmp]
+            llvm_converter_state.identifier_to_var[ttmp].type = i;
+        for varr in llvm_converter_state.identifier_to_var:
+            if varr.find("[") > -1:
+                pass
+                #llvm_converter_state.identifier_to_var"""
         return builder.store(to_llvm(node.value, builder, module),
                              llvm_converter_state.identifier_to_var[node.identifier.name])
     if isinstance(node, Integer):
