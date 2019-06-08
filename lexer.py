@@ -78,7 +78,7 @@ def parse_atom(grammar, atom, text):
 
     # We hit a terminal expression - no need to recurse further
     if atom not in grammar:
-        print(atom, "ss")
+        #print(atom, "ss")
         # watch out for the sneaky whitespaces ruining the parsing.
         match = re.match(f'{whitespace}({atom})', text)
         if match is not None:
@@ -93,7 +93,7 @@ def parse_atom(grammar, atom, text):
             raise ParseError()
     else:
         # onto non-terminal atoms
-        print(atom, "not")
+        #print(atom, "not")
         for alternative in grammar[atom]:
             try:
                 tree, remainder = parse_sequence(grammar, alternative, text)
@@ -197,5 +197,12 @@ def parse_ast_args(cls, ast_args: List) -> Union[tree.AstNode, List[tree.AstNode
             ast_args[0] = identifier
             ast_args[1] = expres
             ast_args = ast_args[: 2]
+
+    if cls == tree.Identifier and len(ast_args) > 1:
+        if (ast_args[1] == '['):
+            identifier, _, valInt, _ = ast_args
+            identifier = identifier + "[" + str(valInt.value) + "]"
+            ast_args[0] = identifier
+            ast_args = ast_args[: 1]
 
     return cls(*ast_args)
