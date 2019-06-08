@@ -179,21 +179,23 @@ def to_llvm(node: AstNode, builder: Union[CustomBuilder, None] = None, module: U
             arg_list.append(to_llvm(arg, builder, module))
         return arg_list
     if isinstance(node, Declaration):
-        print(node.type)
+        #print(node.type)
         variable = builder.alloca(
             type_to_llvm_type(node.type), name=node.identifier.name)
-        llvm_converter_state.identifier_to_var[node.identifier.name] = variable
         tmp = str(variable)
         index1 = tmp.find("[")+1
         if index1 > 0:
-            index2 = tmp.find("i64") - 2
+            index2 = tmp.find("]")
             count = int(tmp[index1 : index2])
-            new_type = node.type[:node.type.index("Identifier")]
+            new_type = node.type
+            index = node.identifier.name.find("[")
             for i in range(0, count):
-                new_name = node.identifier.name+"["+str(i)+"]"
+                new_name = node.identifier.name[:index]+"["+str(i)+"]"
                 new_variable = builder.alloca(
                     type_to_llvm_type(new_type), name=new_name)
                 llvm_converter_state.identifier_to_var[new_name] = new_variable
+        else:
+            llvm_converter_state.identifier_to_var[node.identifier.name] = variable
         if node.value is not None:
             return builder.store(to_llvm(node.value, builder, module), variable)
         else:
