@@ -1,13 +1,9 @@
-"""Note our method to go from parsing output to AST expects to find a class in this file for each grammar expression."""
-
 from typing import Union, List
 
 
 class AstNode:
-    # A set of strings that we can discard after parsing.
-    # Ex: in 'var a = 2', we don't need 'var' when building our Assignment node.
+    # discard it
     SYNTAX_STRINGS = {'=', ';', ',', '', '"', "'", '(', ')', '()', '{', '}', '{}', 'return', 'if', 'else', 'for',
-                      # I'm not sure anymore why I need whitespace characters here. Removing does break tests though ;).
                       ' ', '\n'}
 
     @property
@@ -50,9 +46,6 @@ class Statement(AstNode):
 
 
 class Expr(Statement):
-    # TODO: the *value* of this class is debatable as well (like Statement)
-    # I think it should be an abstract class and Integer, String, etc should inherit from it.
-
     @property
     def children(self):
         return []
@@ -142,7 +135,8 @@ class BinOp(AstNode):
     EQ = '=='
     NEQ = '!='
 
-    OPERATORS = [MULTIPLY, ADD, SUBSTRACT, DIVIDE, MODULO, GT, LT, GTE, LTE, EQ, NEQ]
+    OPERATORS = [MULTIPLY, ADD, SUBSTRACT,
+                 DIVIDE, MODULO, GT, LT, GTE, LTE, EQ, NEQ]
 
     def __init__(self, left, operation, right):
         self.operation = operation
@@ -172,8 +166,6 @@ class Function(Statement):
 
 
 class BodyBlock(AstNode):
-    # Name is lame, to avoid conflict with Block defined in the grammar...
-
     def __init__(self, statements: List[Statement]):
         self.statements = statements
 
@@ -254,7 +246,6 @@ class ForLoop(Statement):
 
 def ControlFlowBody(statement_or_block=None):
     if statement_or_block is None:
-        # This is an empty if block with braces.
         return BodyBlock([])
     if isinstance(statement_or_block, Statement):
         return BodyBlock([statement_or_block])
@@ -263,11 +254,6 @@ def ControlFlowBody(statement_or_block=None):
 
 
 def reduce_to_list(item, items=None):
-    """Typically we will have three statements (lines of code basically) in a row, giving us:
-    Block line1 [Block line2 [Block line3]]
-
-    And we want a list of statements at the end of the day
-    """
     if items is None:
         items = []
     if isinstance(item, list):
@@ -280,7 +266,6 @@ def Noop(ast_or_terminal_token):
     return ast_or_terminal_token
 
 
-# Noop because we dont want to create a node for these. They were just here to make the grammar clearer.
 SimpleExpr = Noop
 Operator = Noop
 UnaryOperator = Noop
@@ -289,14 +274,12 @@ ForInit = Noop
 
 Block = reduce_to_list
 
-# This was created during the Great Battle of Left Recursion and Left Associativity.
 Expr2 = Expr
 
 
 def ast_to_str(ast: AstNode, depth=0):
     """Return a pretty-print representation of an AST"""
     indent = ' ' * 2
-    # Each node class is responsible for providing a __str__ function.
     extra_break = '\n' if ast.children else ''
     return indent * depth + str(ast) + extra_break + '\n'.join(
         [ast_to_str(child, depth=depth + 1) for child in ast.children])

@@ -11,7 +11,6 @@ with open('C_grammar', 'r') as f:
     g = read_grammar(f.read())
 
 
-# @click.Parameter()   # nice to get the docs on signature/parameters that click.argument does not give easily.
 def compile(source_file, genExe=False):
     token_list, remainder = parse(g, source_file.read())
     print(remainder)
@@ -20,11 +19,11 @@ def compile(source_file, genExe=False):
     ast = to_ast(token_list)
     bcFile = str(to_llvm(ast))
     print(bcFile)
-    with open("result.bc", "w") as file:
+    with open("result.ll", "w") as file:
         file.write(bcFile)
     print(genExe)
     if(genExe):
-        os.system("clang result.bc")
+        os.system("clang result.ll")
 
 
 if __name__ == '__main__':
