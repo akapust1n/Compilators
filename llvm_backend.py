@@ -7,6 +7,7 @@ from llvmlite.ir import NamedValue
 from tree import Function, Return, Integer, AstNode, BodyBlock, FunctionArgs, FunctionCall, \
     FunctionCallArgs, Declaration, Assignment, Char, BinOp, UnOp, Wrap, String, Identifier, If, ForLoop
 
+dictr = {}
 
 class CustomBuilder(ir.IRBuilder):
 
@@ -53,7 +54,7 @@ class CustomBuilder(ir.IRBuilder):
         bbend = self.append_basic_block(name=bb.name + '.endfor')
 
         # In the current block we always redirect to the for condition. No questions asked.
-        self.branch(bbcond)
+        #self.branch(bbcond)
 
         # Same at the end of bbincr
         self.position_at_end(bbincr)
@@ -197,6 +198,21 @@ def to_llvm(node: AstNode, builder: Union[CustomBuilder, None] = None, module: U
         else:
             llvm_converter_state.identifier_to_var[node.identifier.name] = variable
         if node.value is not None:
+            if hasattr(node.value, "operation"):
+                left = node.value.left
+                if hasattr(left, "name"):
+                    left = dictr[left.name]
+                else:
+                    left = left.value
+                right = node.value.right
+                if hasattr(right, "name"):
+                    right = dictr[right.name]
+                else:
+                    right = right.value
+                if node.value.operation == "+":
+                    dictr[node.identifier.name] = right + left
+                else:
+                    dictr[node.identifier.name] = left - right
             return builder.store(to_llvm(node.value, builder, module), variable)
         else:
             return variable
@@ -214,6 +230,17 @@ def to_llvm(node: AstNode, builder: Union[CustomBuilder, None] = None, module: U
             if varr.find("[") > -1:
                 pass
                 #llvm_converter_state.identifier_to_var"""
+        if (node.identifier.name.find("[") > 0):
+            index1 = node.identifier.name.find("[")+1
+            index2 = node.identifier.name.find("]")
+            varr = node.identifier.name[index1 : index2]
+            try:
+                varr = int(varr)
+            except:
+                var1 = llvm_converter_state.identifier_to_var[str(node.identifier.name).replace(varr, str(dictr[varr]))]
+                return builder.store(to_llvm(node.value, builder, module), var1)
+        elif hasattr(node.value, "value"):
+            dictr[node.identifier.name] = node.value.value
         return builder.store(to_llvm(node.value, builder, module),
                              llvm_converter_state.identifier_to_var[node.identifier.name])
     if isinstance(node, Integer):
@@ -272,7 +299,17 @@ def to_llvm(node: AstNode, builder: Union[CustomBuilder, None] = None, module: U
     if isinstance(node, Identifier):
         # Here we're just using an identifier 'alone' in an expr (not assigning to it) -> We want to get the value!
         try:
-            var = llvm_converter_state.identifier_to_var[node.name]
+            if (node.name.find("[") > 0):
+                index1 = node.name.find("[") + 1
+                index2 = node.name.find("]")
+                varr = node.name[index1: index2]
+                try:
+                    varr = int(varr)
+                except:
+                    var = llvm_converter_state.identifier_to_var[
+                        str(node.name).replace(varr, str(dictr[varr]))]
+            else:
+                var = llvm_converter_state.identifier_to_var[node.name]
         except KeyError:
             # This is just for function arguments! Not any variable...
             return builder.function.args[llvm_converter_state.arg_identifiers_to_index[node.name]]

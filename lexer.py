@@ -137,8 +137,6 @@ def parse_ast_args(cls, ast_args: List) -> Union[tree.AstNode, List[tree.AstNode
 
     `cls`: Class of the root node.
     """
-    if len(ast_args) > 2:
-        pass
     if cls == tree.Declaration and len(ast_args) >= 3:
         # We deal with chained declarations here (`int a = b = 1;`). We want two separate variable declarations.
         if(ast_args[2] == '['):
@@ -201,7 +199,11 @@ def parse_ast_args(cls, ast_args: List) -> Union[tree.AstNode, List[tree.AstNode
     if cls == tree.Identifier and len(ast_args) > 1:
         if (ast_args[1] == '['):
             identifier, _, valInt, _ = ast_args
-            identifier = identifier + "[" + str(valInt.value) + "]"
+            tmp = str(valInt)[:10]
+            if tmp == "Identifier":
+                identifier = identifier + "[" + valInt.name + "]"
+            else:
+                identifier = identifier + "[" + str(valInt.value) + "]"
             ast_args[0] = identifier
             ast_args = ast_args[: 1]
 
